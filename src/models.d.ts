@@ -11,3 +11,11 @@ type Country = {
   lifeExp: number | null
   gdpPerCap: number | null
 }
+
+type SummaryData = {
+  total: number | null
+  avg: number | null
+  med: number | null
+  min: number | null
+  max: number | null
+}

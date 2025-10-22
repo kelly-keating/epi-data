@@ -1,8 +1,7 @@
-import data from '../data/worldData_clean.json'
+import data from '../../data/worldData_clean.json'
+const COUNTRY_DATA: Country[] = data
 
 function SetQuestions() {
-  const countries: Country[] = data
-
   const continentCount: Record<string, number> = {}
   const regionSize: Record<string, number> = {}
   let longestLifeExp: { country: string; lifeExp: number } = {
@@ -12,7 +11,7 @@ function SetQuestions() {
   const gdpBySubregion: Record<string, number[]> = {}
 
   // As this doesn't rerender, using forEach here, but could use useMemo if needed
-  countries.forEach((country) => {
+  COUNTRY_DATA.forEach((country) => {
     const { continent } = country
 
     continentCount[continent] = continentCount[continent]

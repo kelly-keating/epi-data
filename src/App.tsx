@@ -1,12 +1,14 @@
 import './App.css'
 
-import SetQuestions from './SetQuestions'
+import DataDisplay from './components/DataDisplay'
+import SetQuestions from './components/SetQuestions'
 
 function App() {
   return (
     <>
       <h1>Country Data</h1>
       <SetQuestions />
+      <DataDisplay />
     </>
   )
 }

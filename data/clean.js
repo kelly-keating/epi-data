@@ -55,6 +55,12 @@ function getCleanedEntries(data) {
         value = null
       }
 
+      if (key === 'pop' && id == 17) {
+        // Haiti population showing up as 1.0572466 but online 2014 data says 10,373,234
+        // I'm going to assume this is a recording error and multiply by 10,000,000
+        value = value * 10000000
+      }
+
       // Fill in missing or invalid data
       if (!countries[id][key]) {
         countries[id][key] = value
