@@ -48,6 +48,10 @@ function getCleanedEntries(data) {
       let value = isValid(values[i]) ? values[i] : null
       if (value !== null && !isNaN(value)) value = Number(value)
 
+      if (key === 'lifeExp' && value && value > 100) {
+        value = null
+      }
+
       // Fill in missing or invalid data
       if (!countries[id][key]) {
         countries[id][key] = value
