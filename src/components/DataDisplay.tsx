@@ -1,11 +1,11 @@
 import { useMemo } from 'react'
 import { getDataSummary } from './utils'
 
-import data from '../../data/worldData_clean.json'
-const COUNTRY_DATA: Country[] = data
+import RegionFilters from './RegionFilters'
+import { useFilters } from '../context/FiltersContext'
 
 function DataDisplay() {
-  const filteredCountries = COUNTRY_DATA
+  const { filteredCountries } = useFilters()
 
   const summaryData = useMemo(() => {
     const dataPoints: Record<string, number[]> = {
@@ -33,6 +33,7 @@ function DataDisplay() {
   return (
     <div>
       <h2>Data Display</h2>
+      <RegionFilters />
       <div style={{ display: 'flex', gap: '2rem' }}>
         <ul>
           {filteredCountries.map((country) => (

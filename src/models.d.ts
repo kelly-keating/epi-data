@@ -19,3 +19,35 @@ type SummaryData = {
   min: number | null
   max: number | null
 }
+
+type RegionTree = {
+  [continentName: string]: ContinentNode
+}
+
+type ContinentNode = {
+  [regionName: string]: RegionNode
+}
+
+type RegionNode = {
+  continent: string
+  subregions: {
+    [subregionName: string]: SubRegionNode
+  }
+}
+
+type SubRegionNode = {
+  region: string
+  countries: {
+    [countryName: string]: Country
+  }
+}
+
+type RegionSelection =
+  | { continent: null; region: null; subregion: null }
+  | { continent: string; region: null; subregion: null }
+  | { continent: string; region: string; subregion: null }
+  | { continent: string; region: string; subregion: string }
+
+type FilterSelection = RegionSelection & {
+  type: string | null
+}

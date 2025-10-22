@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "clean": "node ./data/clean.js",
-    "dev": "vite",
+    "dev": "npm run clean && vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

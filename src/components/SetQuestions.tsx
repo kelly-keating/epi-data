@@ -1,5 +1,4 @@
-import data from '../../data/worldData_clean.json'
-const COUNTRY_DATA: Country[] = data
+import { COUNTRY_DATA } from './utils'
 
 function SetQuestions() {
   const continentCount: Record<string, number> = {}

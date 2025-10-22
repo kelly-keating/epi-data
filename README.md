@@ -34,6 +34,7 @@ npm run dev
 - Unique lines == 179, but there are 177 unique country names. Some contain partial data that are filled in on the other lines
 - To dealt with duplicates, I'm filling in data, but duplicates are still checked if the key is missing or invalid. If both lines have valid data for a key, the first line's data is kept and not overwritten
 - For missing data, I'm keeping "#N/A" to indicate missing values in the cleaned csv, but null values in the json. This is to keep things simple and avoid empty cells that might be misread, however it means we need to convert while cleaning. It's more work being done during clean up, but makes it easier to just use the data later (rather than doing it at read) and what seems like so many extra loops aren't on that big a dataset and would need to happen later anyway. Could be better though
+- While looking at filtering regions and subregions etc, I decided to build a data tree to make it easier to access the region data (as if we choose a continent, we can limit the regions available etc). It is heirachical and static data, so makes sense to structure it that way rather than having to process available lists with every user interaction
 
 ## Stretch Goals
 

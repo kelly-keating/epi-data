@@ -1,5 +1,7 @@
 import './App.css'
 
+import { FiltersProvider } from './context/FiltersContext'
+
 import DataDisplay from './components/DataDisplay'
 import SetQuestions from './components/SetQuestions'
 
@@ -8,7 +10,9 @@ function App() {
     <>
       <h1>Country Data</h1>
       <SetQuestions />
-      <DataDisplay />
+      <FiltersProvider>
+        <DataDisplay />
+      </FiltersProvider>
     </>
   )
 }

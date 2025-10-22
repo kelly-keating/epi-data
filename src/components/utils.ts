@@ -1,3 +1,6 @@
+import data from '../../data/worldData_clean.json'
+export const COUNTRY_DATA: Country[] = data
+
 export function getDataSummary(data: number[]): SummaryData {
   return {
     total: sum(data),
