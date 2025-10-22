@@ -21,16 +21,21 @@ function readData() {
 
 /**
  * Preps CSV data by:
- *  - removing duplicates and invalid entries
- *  - filling gaps
+ *  - merging duplicates
+ *  - removing invalid data entries
  *  - converting numbers for json
+ *
+ * @param data - Raw CSV string
+ * @returns Object containing:
+ * - `keys` Header keys
+ * - `countries` Cleaned country data array
  */
 function getCleanedEntries(data) {
   data = data.replace(/\r/g, '')
   const lines = data.split('\n')
 
-  // First line is keys, last should be empty (and is removed)
-  const keys = lines.shift().split(',')
+  // First line is header keys, last should be empty (and is removed)
+  let keys = lines.shift().split(',')
   keys[0] = 'id'
   keys[11] = 'gdpPerCap'
   if (!lines[lines.length - 1].length) lines.pop()
@@ -40,9 +45,7 @@ function getCleanedEntries(data) {
     const values = line.split(',')
     const id = values[0]
 
-    if (!countries[id]) {
-      countries[id] = {}
-    }
+    if (!countries[id]) countries[id] = {}
 
     keys.forEach((key, i) => {
       let value = isValid(values[i]) ? values[i] : null
@@ -61,8 +64,8 @@ function getCleanedEntries(data) {
     return countries
   }, {})
 
-  //  Remove duplicate header (iso_a2) (hardcoded, but could use Set if we vary data)
-  keys.splice(2, 1)
+  //  Remove duplicate headers (iso_a2, or any others)
+  keys = [...new Set(keys)]
 
   return {
     keys,
@@ -83,7 +86,7 @@ function saveDataToCsv(countryData) {
   )
 
   keys[0] = ''
-  // Add keys as first line and merge all lines
+  // Add header keys as first line, and merge all strings
   countryStrs.unshift(keys.join(','))
   const fullStr = countryStrs.join('\n')
 
