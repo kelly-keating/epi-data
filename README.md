@@ -27,5 +27,10 @@ npm run dev
 
 ## Background Info
 
-- This project was generated using vite (React + Typescript)
+- This project was generated using vite (React + Typescript) (I'm not using a db as it's a small static dataset, so we're going frontend only)
 - I was considering whether the data file should be input to the site itself, but decided against it for now to keep things simple. That functionality can be added later if wanted
+- Decided to do a straightforward clean using fs and manual string reading rather than using a csv module. Keeps project weight low, though might be harder to deal with more complex csvs that modules would deal with better
+- Assumption here: Seems like all duplicates are full line duplicates and both are seen in a row. I was going to compare names, but I think all the line counts/ids are unique to the countries, and they immediately follow each other
+- Unique lines == 179, but there are 177 unique country names. Some contain partial data that are filled in on the other lines
+- To dealt with duplicates, I'm filling in data, but duplicates are still checked if the key is missing or invalid. If both lines have valid data for a key, the first line's data is kept and not overwritten
+- For missing data, I'm keeping "#N/A" to indicate missing values in the cleaned csv, but null values in the json. This is to keep things simple and avoid empty cells that might be misread, however it means we need to convert while cleaning. It's more work being done during clean up, but makes it easier to just use the data later (rather than doing it at read) and what seems like so many extra loops aren't on that big a dataset and would need to happen later anyway. Could be better though
